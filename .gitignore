@@ -4,9 +4,15 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
+logs
+*.log
+pnpm-debug.log*
+lerna-debug.log*
 
 # builds
 dist
+dist-ssr
+*.local
 
 # yarn
 .pnp.*
