@@ -1,0 +1,26 @@
+{
+  "black": "#111112",
+  "white": "#ffecd6",
+
+  "darkest": "#0d2b45",
+  "darker": "#203c56",
+  "dark": "#544e68",
+
+  "light": "#ffaa5e",
+  "lighter": "#ffd4a3",
+  "lightest": "#ffecd6",
+
+  "status": {
+    "red": "#ce3250",
+    "green": "#32ce73",
+    "blue": "#3273ce",
+    "yellow": "#cec932",
+    "orange": "#ce7d32"
+  },
+
+  "banana": {
+    "yellow": "#f2dd20",
+    "shaded": "#bfaf23",
+    "stem": "#504a18"
+  }
+}

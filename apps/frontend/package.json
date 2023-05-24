@@ -1,0 +1,47 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "dev:app": "tauri dev",
+    "build:app": "tauri build",
+    "themes": "chakra-cli tokens src/theme/index.ts --strict-token-types --strict-component-types"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.5.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@reduxjs/toolkit": "^1.9.3",
+    "@tauri-apps/api": "^1.2.0",
+    "buffer": "^6.0.3",
+    "focus-visible": "^5.2.0",
+    "framer-motion": "^10.10.0",
+    "pixi-viewport": "^5.0.1",
+    "pixi.js": "^7.2.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.10.0",
+    "react-use-cookie": "^1.4.0",
+    "sdk": "workspace:^",
+    "twojs-ts": "^0.7.0-13"
+  },
+  "devDependencies": {
+    "@chakra-ui/cli": "^2.3.0",
+    "@tauri-apps/cli": "^1.2.2",
+    "@types/node": "^18.7.10",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^3.0.0",
+    "prettier": "^2.8.7",
+    "typescript": "^4.9.5",
+    "vite": "^4.2.1",
+    "vite-plugin-fonts": "^0.7.0",
+    "vite-tsconfig-paths": "^4.0.8"
+  },
+  "packageManager": "yarn@3.5.0"
+}

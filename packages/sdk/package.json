@@ -1,0 +1,58 @@
+{
+  "private": true,
+  "name": "sdk",
+  "license": "MIT",
+  "version": "0.0.6",
+  "author": "Synqat <ken@slinky.link>",
+  "packageManager": "yarn@3.5.0",
+  "scripts": {
+    "check:types": "yarn tsc --noEmit",
+    "dev": "tsx esbuild.config.ts --watch",
+    "build": "yarn clean && tsx esbuild.config.ts",
+    "clean": "rimraf dist types",
+    "db:push": "yarn cfg prisma db push",
+    "db:pull": "yarn cfg prisma db pull",
+    "db:migrate": "yarn cfg prisma migrate dev",
+    "db:generate": "yarn cfg prisma generate",
+    "db:studio": "yarn cfg prisma studio"
+  },
+  "files": [
+    "dist",
+    "test",
+    "permissions"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PixcelApp/sdk.git"
+  },
+  "publishConfig": {
+    "@PixcelApp:registry": "https://npm.pkg.github.com"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./permissions": {
+      "require": "./dist/cjs/permissions/index.js",
+      "import": "./dist/esm/permissions/index.js"
+    },
+    "./test": {
+      "require": "./dist/cjs/test/index.js",
+      "import": "./dist/esm/test/index.js"
+    }
+  },
+  "dependencies": {
+    "@prisma/client": "^4.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.12",
+    "esbuild": "^0.17.17",
+    "execa": "^7.1.1",
+    "fast-glob": "^3.2.12",
+    "prettier": "^2.8.7",
+    "prisma": "^4.13.0",
+    "prisma-graphql-type-decimal": "^3.0.0",
+    "prisma-nestjs-graphql": "^18.0.0",
+    "rimraf": "^5.0.0",
+    "tsx": "^3.12.6",
+    "typescript": "^5.0.4"
+  }
+}

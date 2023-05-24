@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": "./",
+    "resolveJsonModule": true,
+    "emitDeclarationOnly": false
+  },
+  "include": ["esbuild.config.ts"],
+  "exclude": ["src"]
+}
