@@ -1,0 +1,18 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Mutation {
+  createUser(username: String!): UserModel!
+}
+
+type Query {
+  user(id: String!): UserModel
+}
+
+type UserModel {
+  id: String!
+  nickname: String!
+  type: Float!
+  username: String!
+}
