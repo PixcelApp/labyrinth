@@ -2,17 +2,30 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Entity {
+  id: String!
+}
+
 type Mutation {
-  createUser(username: String!): UserModel!
+  createUser(username: String!): User!
 }
 
 type Query {
-  user(id: String!): UserModel
+  entity(id: String!): Entity
+  user(id: String!): User
 }
 
-type UserModel {
+type User {
+  entity: Entity!
   id: String!
-  nickname: String!
-  type: Float!
+  nickname: String
+  type: UserType!
   username: String!
+}
+
+enum UserType {
+  Free
+  Moderator
+  Premium
+  Preview
 }

@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "cfg": "dotenv -c --",
+    "cfg": "dotenv -e ../../.env -c --",
     "tsg": "yarn cfg tsx",
     "build": "yarn cfg nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -32,6 +32,7 @@
     "@nestjs/graphql": "^11.0.5",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
+    "@sapphire/snowflake": "^3.5.1",
     "graphql": "^16.6.0",
     "pg": "^8.11.0",
     "pg-connection-string": "^2.6.0",

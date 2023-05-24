@@ -6,7 +6,9 @@ import { EntityModel } from 'src/models/Entity.model'
 import { UserModel } from 'src/models/User.model'
 import { parse } from 'pg-connection-string'
 
-export const connectionOptions = parse(getConfigValue<string>('DATABASE_URL'))
+export const connectionOptions = parse(
+  getConfigValue<string>('DATABASE_URL', { required: true }),
+)
 
 export const pgDataSource = new DataSource({
   type: 'postgres',

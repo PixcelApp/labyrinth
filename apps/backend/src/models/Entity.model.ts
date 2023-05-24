@@ -1,10 +1,10 @@
-import { Entity, PrimaryColumn } from 'typeorm'
 import { Field, ObjectType } from '@nestjs/graphql'
+import { Entity, PrimaryColumn } from 'typeorm'
 
-@ObjectType()
-@Entity()
+@ObjectType('Entity')
+@Entity('entities')
 export class EntityModel {
-  @Field()
+  @Field(() => String)
   @PrimaryColumn('varchar')
   id: string
 }

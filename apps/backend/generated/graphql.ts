@@ -8,18 +8,32 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum UserType {
+    Free = "Free",
+    Moderator = "Moderator",
+    Premium = "Premium",
+    Preview = "Preview"
+}
+
+export class Entity {
+    id: string;
+}
+
 export abstract class IMutation {
-    abstract createUser(username: string): UserModel | Promise<UserModel>;
+    abstract createUser(username: string): User | Promise<User>;
 }
 
 export abstract class IQuery {
-    abstract user(id: string): Nullable<UserModel> | Promise<Nullable<UserModel>>;
+    abstract entity(id: string): Nullable<Entity> | Promise<Nullable<Entity>>;
+
+    abstract user(id: string): Nullable<User> | Promise<Nullable<User>>;
 }
 
-export class UserModel {
+export class User {
+    entity: Entity;
     id: string;
-    nickname: string;
-    type: number;
+    nickname?: Nullable<string>;
+    type: UserType;
     username: string;
 }
 

@@ -1,6 +1,7 @@
-import { Column, Entity } from 'typeorm'
+import { Field, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { EntityModel } from 'src/models/Entity.model'
-import { Field, ObjectType } from '@nestjs/graphql'
+import { Options } from 'src/models/tools'
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm'
 
 export enum UserType {
   Preview,
@@ -9,18 +10,30 @@ export enum UserType {
   Moderator,
 }
 
-@ObjectType()
-@Entity()
+registerEnumType(UserType, {
+  name: 'UserType',
+})
+
+@ObjectType('User')
+@Entity('users')
 export class UserModel extends EntityModel {
-  @Field()
-  @Column('varchar', { unique: true })
+  @JoinColumn()
+  @Field(() => EntityModel)
+  @OneToOne(() => EntityModel, {
+    nullable: false,
+    cascade: true,
+  })
+  entity: EntityModel
+
+  @Field(() => String)
+  @Column('varchar', Options.unique)
   username: string
 
-  @Field()
-  @Column('text')
+  @Field(() => String, Options.nullable)
+  @Column('text', Options.nullable)
   nickname?: string
 
-  @Field()
+  @Field(() => UserType)
   @Column('enum', { enum: UserType })
   type: UserType
 }
