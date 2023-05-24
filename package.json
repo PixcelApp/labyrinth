@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "labyrinth",
+  "version": "0.0.0",
+  "repository": "https://github.com/PixcelApp/labyrinth.git",
+  "author": "Synqat <ken@slinky.link>",
+  "license": "MIT",
+  "scripts": {
+    "build": "lerna run build",
+    "sdk": "yarn workspace sdk",
+    "fe": "yarn workspace frontend",
+    "be": "yarn workspace backend"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "packageManager": "yarn@3.5.1",
+  "devDependencies": {
+    "lerna": "^6.6.2",
+    "prettier": "^2.8.8"
+  },
+  "dependencies": {
+    "fast-glob": "^3.2.12"
+  }
+}
