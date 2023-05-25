@@ -6,7 +6,8 @@ export default defineConfig(async () => ({
   plugins: [react(), tsconfigPathsPlugin()],
   clearScreen: false,
   server: {
-    port: 1420,
+    host: 'localhost',
+    port: 3000,
     strictPort: true,
   },
   envPrefix: ['VITE_', 'TAURI_'],

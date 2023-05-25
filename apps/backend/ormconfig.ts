@@ -1,9 +1,8 @@
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions'
-import { UserModel } from 'src/models/User.model'
-import { EntityModel } from 'src/models/Entity.model'
 import { DataSource } from 'typeorm'
 import { parse } from 'pg-connection-string'
 import { getConfigValue } from 'src/config'
+import { AllModels } from 'src/models'
 
 interface BetterConnectionOptions extends PostgresConnectionOptions {
   readonly seeds?: string[]
@@ -14,7 +13,7 @@ const connectionOptions = parse(getConfigValue<string>('DATABASE_URL'))
 
 const config: BetterConnectionOptions = {
   type: 'postgres',
-  entities: [UserModel, EntityModel],
+  entities: AllModels,
   synchronize: true,
   migrationsRun: false,
   logging: true,

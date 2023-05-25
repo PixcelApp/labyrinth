@@ -2,23 +2,70 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Auth {
+  password: String!
+  user: User!
+  userId: String!
+}
+
 type Entity {
   id: String!
 }
 
 type Mutation {
+  createProject(name: String!): Project!
   createUser(username: String!): User!
+}
+
+type Organization {
+  entity: Entity!
+  id: String!
+  members: [OrganizationContributor!]!
+  type: OrganizationType!
+}
+
+type OrganizationContributor {
+  organizationId: String!
+  permissions: Float!
+  userId: String!
+}
+
+enum OrganizationType {
+  Default
+}
+
+type Project {
+  entity: Entity!
+  id: String!
+  members: [ProjectContributor!]!
+  name: String!
+  type: ProjectType!
+}
+
+type ProjectContributor {
+  permissions: Float!
+  projectId: String!
+  userId: String!
+}
+
+enum ProjectType {
+  Default
+  Simple
 }
 
 type Query {
   entity(id: String!): Entity
+  project(id: String!): Organization
   user(id: String!): User
 }
 
 type User {
+  auth: Auth!
   entity: Entity!
   id: String!
   nickname: String
+  organizationMemberships: [OrganizationContributor!]!
+  projectMemberships: [ProjectContributor!]!
   type: UserType!
   username: String!
 }

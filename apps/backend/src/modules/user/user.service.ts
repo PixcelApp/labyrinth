@@ -4,6 +4,12 @@ import { UserModel, UserType } from 'src/models/User.model'
 import { Repository } from 'typeorm'
 import { snowflake } from 'src/utils'
 import { EntityModel } from 'src/models/Entity.model'
+import {
+  OrganizationModel,
+  OrganizationType,
+} from 'src/models/Organization.model'
+import { OrganizationContributorModel } from 'src/models/OrganizationContributor.model'
+import { Permissions } from 'sdk/permissions'
 
 @Injectable()
 export class UserService {
@@ -12,24 +18,23 @@ export class UserService {
     private entities: Repository<EntityModel>,
     @InjectRepository(UserModel)
     private users: Repository<UserModel>,
+    @InjectRepository(OrganizationModel)
+    private organizations: Repository<OrganizationModel>,
+    @InjectRepository(OrganizationContributorModel)
+    private organizationContributors: Repository<OrganizationContributorModel>,
   ) {}
 
-  get = (id: string) =>
-    this.users.findOne({ where: { id }, relations: { entity: true } })
+  get = (id: string) => this.users.findOneBy({ id })
 
-  create = async (username: string) => {
-    const entity = this.entities.create({
-      id: snowflake(),
-    })
+  create = (username: string) => {
+    const entity = new EntityModel()
+    entity.id = snowflake()
 
-    const user = this.users.create({
-      id: entity.id,
-      entity,
-      type: UserType.Preview,
-      username: username.toLowerCase(),
-    })
+    const user = new UserModel()
+    user.type = UserType.Preview
+    user.username = username.toLowerCase()
+    user.entity = entity
 
-    await this.entities.save(entity)
-    return await this.users.save(user)
+    return this.users.save(user)
   }
 }

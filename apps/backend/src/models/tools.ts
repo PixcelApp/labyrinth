@@ -1,4 +1,6 @@
-import { ColumnCommonOptions } from 'typeorm/decorator/options/ColumnCommonOptions'
+import type { ColumnCommonOptions } from 'typeorm/decorator/options/ColumnCommonOptions'
+import { Field } from '@nestjs/graphql'
+import { PrimaryColumn } from 'typeorm'
 
 export class Options {
   #options: ColumnCommonOptions = {}
@@ -49,4 +51,14 @@ export class Options {
 
   static unique = new Options().unique.get
   static nullable = new Options().nullable.get
+}
+
+export const Snowflake = () => {
+  const field = Field(() => String)
+  const column = PrimaryColumn('varchar')
+
+  return (target: any, propertyKey: string) => {
+    field(target, propertyKey)
+    column(target, propertyKey)
+  }
 }

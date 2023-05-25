@@ -2,9 +2,8 @@ import 'reflect-metadata'
 
 import { DataSource } from 'typeorm'
 import { getConfigValue } from 'src/config'
-import { EntityModel } from 'src/models/Entity.model'
-import { UserModel } from 'src/models/User.model'
 import { parse } from 'pg-connection-string'
+import { AllModels } from 'src/models'
 
 export const connectionOptions = parse(
   getConfigValue<string>('DATABASE_URL', { required: true }),
@@ -12,7 +11,7 @@ export const connectionOptions = parse(
 
 export const pgDataSource = new DataSource({
   type: 'postgres',
-  entities: [EntityModel, UserModel],
+  entities: AllModels,
   host: connectionOptions.host,
   port: Number(connectionOptions.port),
   username: connectionOptions.user,

@@ -1,7 +1,10 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { EntityModel } from 'src/models/Entity.model'
-import { Options } from 'src/models/tools'
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm'
+import { Options, Snowflake } from 'src/models/tools'
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm'
+import { ProjectContributorModel } from 'src/models/ProjectContributor.model'
+import { OrganizationContributorModel } from 'src/models/OrganizationContributor.model'
+import { AuthModel } from 'src/models/Auth.model'
 
 export enum UserType {
   Preview,
@@ -16,14 +19,22 @@ registerEnumType(UserType, {
 
 @ObjectType('User')
 @Entity('users')
-export class UserModel extends EntityModel {
-  @JoinColumn()
+export class UserModel {
+  @Snowflake()
+  id: string
+
+  @Field(() => UserType)
+  @Column('enum', { enum: UserType })
+  type: UserType
+
   @Field(() => EntityModel)
-  @OneToOne(() => EntityModel, {
-    nullable: false,
-    cascade: true,
-  })
+  @OneToOne(() => EntityModel, { cascade: true })
+  @JoinColumn({ name: 'id' })
   entity: EntityModel
+
+  @Field(() => AuthModel)
+  @OneToOne(() => AuthModel, { cascade: true })
+  auth: AuthModel
 
   @Field(() => String)
   @Column('varchar', Options.unique)
@@ -33,7 +44,11 @@ export class UserModel extends EntityModel {
   @Column('text', Options.nullable)
   nickname?: string
 
-  @Field(() => UserType)
-  @Column('enum', { enum: UserType })
-  type: UserType
+  @Field(() => [ProjectContributorModel])
+  @OneToMany(() => ProjectContributorModel, (member) => member.userId)
+  projectMemberships: ProjectContributorModel[]
+
+  @Field(() => [OrganizationContributorModel])
+  @OneToMany(() => OrganizationContributorModel, (member) => member.userId)
+  organizationMemberships: OrganizationContributorModel[]
 }

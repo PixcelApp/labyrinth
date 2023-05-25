@@ -3,7 +3,7 @@ import { EntityModel } from 'src/models/Entity.model'
 import { EntityService } from 'src/modules/entity/entity.service'
 
 @Resolver(EntityModel)
-export class EntityResolver {
+export class AuthResolver {
   constructor(private readonly entities: EntityService) {}
 
   @Query(() => EntityModel, { nullable: true })

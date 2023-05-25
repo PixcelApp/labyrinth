@@ -1,10 +1,10 @@
-import { Field, ObjectType } from '@nestjs/graphql'
-import { Entity, PrimaryColumn } from 'typeorm'
+import { ObjectType } from '@nestjs/graphql'
+import { Entity } from 'typeorm'
+import { Snowflake } from 'src/models/tools'
 
 @ObjectType('Entity')
 @Entity('entities')
 export class EntityModel {
-  @Field(() => String)
-  @PrimaryColumn('varchar')
+  @Snowflake()
   id: string
 }
